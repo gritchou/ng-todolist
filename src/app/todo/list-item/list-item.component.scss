@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  transition: transform 1.5s 0s, opacity 1.25s 0s;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+:host(.hover-todo .tofav::before) {
+  display: block;
+}
+
+.complete::before {
+  content: '✔️';
+}
+.uncomplete::before {
+  content: '⚪';
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.delete::before {
+  content: '❌';
+}
+
+.tofav::before {
+  content: '⭐';
+  display: none;
+  // content: fa-content($fa-var-star);
+}
+
+// textarea {
+//   resize: none;
+// }

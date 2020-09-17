@@ -1,0 +1,21 @@
+<section>
+  <input placeholder="What to do next?" (keyup.enter)="addTodo($event)">
+  <h2 *ngIf="favoritesCount$ | async">Favorites - {{ favoritesCount$ | async }}</h2>
+  <ng-container *ngFor="let item of favorites$ | async">
+    <app-list-item [item]="item" (deleteRequest)="deleteItem($event)" (favoriteRequest)="favoriteItem($event)" (toggleCompleteRequest)="toggleComplete($event)">
+    </app-list-item>
+  </ng-container>
+  <h2 *ngIf="uncompletedCount$ | async">Todo - {{ uncompletedCount$ | async }} left</h2>
+  <ng-container *ngFor="let item of items$ | async">
+    <app-list-item [item]="item" (deleteRequest)="deleteItem($event)" (favoriteRequest)="favoriteItem($event)" (toggleCompleteRequest)="toggleComplete($event)">
+    </app-list-item>
+  </ng-container>
+  <h2 *ngIf="completedCount$ | async">Completed - {{ completedCount$ | async }}</h2>
+  <ng-container *ngFor="let item of completes$ | async">
+    <app-list-item [item]="item" (deleteRequest)="deleteItem($event)" (favoriteRequest)="favoriteItem($event)" (toggleCompleteRequest)="toggleComplete($event)">
+    </app-list-item>
+  </ng-container>
+</section>
+<footer class="footer">
+  <span>Angular 10 Todolist experiment</span>
+</footer>

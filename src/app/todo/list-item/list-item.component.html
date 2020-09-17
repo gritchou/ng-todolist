@@ -1,0 +1,7 @@
+<div [ngClass]="item.complete ? 'complete' : 'uncomplete'" (click)="toggleComplete()"></div>
+<!-- <div [class.line-through]="item.complete">{{ item.text }}</div> -->
+<textarea readonly>{{ item.text }}</textarea>
+<fa-icon *ngIf="item.favorite" [icon]="faStar" [class.favorite]="item.favorite" (click)="favorite()"></fa-icon>
+<!-- <div class="favorite" (click)="favorite()"></div> -->
+<div *ngIf="!item.favorite" class="tofav" (click)="favorite()"></div>
+<div class="delete" (click)="delete()"></div>
