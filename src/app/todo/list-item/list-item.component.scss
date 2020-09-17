@@ -1,36 +1,37 @@
 :host {
   display: flex;
   flex-direction: row;
-  transition: transform 1.5s 0s, opacity 1.25s 0s;
-  transform: translateX(0);
-  opacity: 1;
+  align-items: center;
 }
 
 :host(.hover-todo .tofav::before) {
   display: block;
 }
 
-.complete::before {
-  content: '✔️';
+.check::before {
+  content: "⚪";
 }
-.uncomplete::before {
-  content: '⚪';
+.check.complete::before {
+  content: "✔️";
 }
 
 .line-through {
   text-decoration: line-through;
 }
 
-.delete::before {
-  content: '❌';
+.delete {
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 30px;
 }
 
-.tofav::before {
-  content: '⭐';
-  display: none;
-  // content: fa-content($fa-var-star);
+.favorite {
+  cursor: pointer;
+  font-size: 30px;
+  line-height: 30px;
 }
 
-// textarea {
-//   resize: none;
-// }
+input {
+  margin: 0 8px;
+  padding: 5px;
+}

@@ -1,7 +1,4 @@
-<div [ngClass]="item.complete ? 'complete' : 'uncomplete'" (click)="toggleComplete()"></div>
-<!-- <div [class.line-through]="item.complete">{{ item.text }}</div> -->
-<textarea readonly>{{ item.text }}</textarea>
-<fa-icon *ngIf="item.favorite" [icon]="faStar" [class.favorite]="item.favorite" (click)="favorite()"></fa-icon>
-<!-- <div class="favorite" (click)="favorite()"></div> -->
-<div *ngIf="!item.favorite" class="tofav" (click)="favorite()"></div>
-<div class="delete" (click)="delete()"></div>
+<div class="check" [class.complete]="item.complete" (click)="toggleComplete()"></div>
+<input [class.line-through]="item.complete" [formControl]="textForm" />
+<div class="favorite" (click)="favorite()">{{ item.favorite ? '★' : '☆' }}</div>
+<div aria-label="Close" class="delete" (click)="delete()">✕</div>

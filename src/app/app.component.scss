@@ -1,11 +1,19 @@
 :host {
-	display: grid;
-  place-items: center;
+  display: grid;
   height: 100%;
 }
 
-// section {
-//   display: flex;
-//   flex-direction: column;
-//   height: 100%;
-// }
+.header {
+  height: 20vh;
+  background-color: blue;
+  color: white;
+}
+
+section {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+section * {
+  padding: 20px;
+}

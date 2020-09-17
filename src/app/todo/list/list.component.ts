@@ -1,23 +1,52 @@
-import { Component, Input } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { Item } from '../item';
+import { Item } from "../item";
 
-import { TodoService } from '../todo.service';
-import { Observable } from 'rxjs';
+import { TodoService } from "../todo.service";
+import { Observable } from "rxjs";
+import { FormGroup, FormControl } from "@angular/forms";
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate
+} from "@angular/animations";
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  selector: "app-list",
+  templateUrl: "./list.component.html",
+  styleUrls: ["./list.component.scss"],
+  animations: [
+    trigger("flyInOut", [
+      state("in", style({ transform: "translateX(0)" })),
+      transition("void => *", [
+        style({ transform: "translateX(-100%)" }),
+        animate(100)
+      ]),
+      transition("* => void", [
+        animate(100, style({ transform: "translateX(100%)" }))
+      ])
+    ])
+  ]
 })
 export class ListComponent {
+  items$: Observable<Item[]> = this.todoService.todos$;
+  favorites$: Observable<Item[]> = this.todoService.favs$;
+  completes$: Observable<Item[]> = this.todoService.completes$;
+  uncompletedCount$: Observable<
+    number
+  > = this.todoService.getUnCompletedTasksCount();
+  favoritesCount$: Observable<
+    number
+  > = this.todoService.getFavoriteTasksCount();
+  completedCount$: Observable<
+    number
+  > = this.todoService.getCompletedTasksCount();
 
-  items$: Observable<Item[]> = this.todoService.getTodos();
-  favorites$: Observable<Item[]> = this.todoService.getFavs();
-  completes$: Observable<Item[]> = this.todoService.getCompletes();
-  uncompletedCount$: Observable<number> = this.todoService.getUnCompletedTasksCount();
-  favoritesCount$: Observable<number> = this.todoService.getFavoriteTasksCount();
-  completedCount$: Observable<number> = this.todoService.getCompletedTasksCount();
+  addTodoGroup = new FormGroup({
+    todoInput: new FormControl("")
+  });
 
   constructor(private todoService: TodoService) { }
 
@@ -33,8 +62,11 @@ export class ListComponent {
     this.todoService.toggleComplete(item);
   }
 
-  addTodo($event): void {
-    this.todoService.addTodo({ text: $event.target.value, complete: false, favorite: false });
+  addTodo(): void {
+    this.todoService.addTodo({
+      text: this.addTodoGroup.value.todoInput,
+      complete: false,
+      favorite: false
+    });
   }
-
 }
